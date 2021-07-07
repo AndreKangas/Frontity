@@ -17,6 +17,8 @@ const List = ({ state, actions }) => {
                     </Link>
                 )
             })}
+
+            {/* Pagination to <List> component */}
             <PrevNextNav>
             {data.previous && (
           <button

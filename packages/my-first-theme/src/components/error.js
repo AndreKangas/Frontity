@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "frontity"
 
+//  create a component to inform the user that the page can't be found
 const Error = ({ state }) => {
     return (
         <>

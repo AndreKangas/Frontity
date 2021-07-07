@@ -1,6 +1,15 @@
 import React from "react"
+
+//  connect -  enables a component in our theme to access data stored in the state, or functions available in actions
+// <Global>, css, as well as styled - exported by the Emotion library
+// Head component - add tags to the HTML <head> element.
 import { connect, Global, css, styled, Head } from "frontity"
+
+//  outputs an <a> element into the resulting HTML, but without forcing a page reload
 import Link from "@frontity/components/link"
+
+//   renders the first child component that returns true as the value of its when prop.
+//  'switch' statement
 import Switch from "@frontity/components/switch"
 import List from "./list"
 import Post from "./post"
@@ -15,6 +24,9 @@ const Root = ({ state, actions }) => {
 
     return (
         <>
+
+            {/* styles that apply site-wide */}
+            {/* Global has an attribute, styles, which in turn takes a css function as it's value */}
             <Global styles={css(externalCss)}/>
             <Head>
                 <title>My First Frontity Theme</title>
@@ -22,9 +34,13 @@ const Root = ({ state, actions }) => {
                     name="description"
                     content="Based on the Frontity step by step tutorial" />
             </Head>
+
+            {/* isPostType gets passed to a function that we add to our CSS that conditionally checks the boolean value passed in */}
             <Header isPostType={data.isPostType} isPage={data.isPage}>
                 <HeaderContent>
                     <h1>Frontity Workshop</h1>
+
+                    {/* check the value of isUrlVisible and either display the URL or not */}
                     { state.theme.isUrlVisible ? (
                         <>
                             Current URL: {state.router.link}{" "}
@@ -59,10 +75,15 @@ const Root = ({ state, actions }) => {
 
 export default connect(Root)
 
+
+//  CSS-in-JS
+//  It's also possible with separate scc script
 const Header = styled.header`
     background-color: #e5edee;
     border-width: 0 0 8px 0;
     border-style: solid;
+
+    //cannot use if...then...else in JavaScript embedded within a template literal.
     border-color: ${ props => props.isPostType ? ( props.isPage ? 'lightsteelblue' : 'lightseagreen' ) : 'maroon'};
     
     h1 {
